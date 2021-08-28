@@ -1,36 +1,46 @@
-django-cors-headersのインストール
-settings.pyの編集
-INSTALLD_APPS
-MIDDLEWARE
-CORS_ORIGIN_WHITELIST
-参考
+# DRFでAPIを作成する
+  __開発環境__
 
-(venv)$ pip install django-cors-headers
-settings.pyの編集
-INSTALLD_APPS
-corsheadersを追加します。
+* OS: `macOS Big Sur v11.5.2`
+* Python: `Python 3.0.6`
+* Django: `3.2.5`
 
 
-INSTALLED_APPS = [
-    ・・・
-    'rest_framework',
-    'api',
-    'corsheaders', # ここに追加
-　　・・・
-]
-MIDDLEWARE
-corsheaders.middleware.CorsMiddlewareを追記します。
+## :horse: Djangoのプロジェクトを作成
 
 
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # ここに追加
-    'django.middleware.security.SecurityMiddleware',
-    ・・・
-]
-CORS_ORIGIN_WHITELIST
-CORS_ORIGIN_WHITELISTを追加し、フロントエンドで通信したいURLを記入します。
+
+  __API実装__
+
+[Django REST Frameworkを使って爆速でAPIを実装する](https://qiita.com/kimihiro_n/items/86e0a9e619720e57ecd8)
+
+__CORS設定__
+
+DRFを使って、APIエンドポイントをフロントエンドから叩く場合にはCORSの設定が必要
+
+[【drf】django-cors-headersを使ってCORS設定を行う](https://self-methods.com/drf-cors-headers/)
 
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000', # ここに追加
-]
+__動作確認__
+
+```bash
+
+# 開発サーバーを起動
+$python manage.py runserver
+
+```
+
+
+http://localhost:8000/admin/
+管理画面に入り,EntrysとUsersをいくつか作っておく
+
+
+-----
+
+<img width="739" alt="スクリーンショット 2021-08-28 9 51 46" src="https://user-images.githubusercontent.com/84751550/131200964-69ea9e5a-1697-48ed-92dd-153927740112.png">
+
+<img width="734" alt="スクリーンショット 2021-08-28 9 52 00" src="https://user-images.githubusercontent.com/84751550/131200967-238bbd44-c0ca-4de0-a146-40f294a856e0.png">
+
+
+
+-----
