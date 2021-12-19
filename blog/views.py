@@ -17,3 +17,11 @@ class EntryViewSet(viewsets.ModelViewSet):
     queryset = Entry.objects.all()
     serializer_class = EntrySerializer
     filter_fields = ('author', 'status')
+
+
+def temp(request):
+    context = {
+        'msg': 'こんにちは、世界！'
+
+    }
+    return render(request, 'blog/index.html', context)

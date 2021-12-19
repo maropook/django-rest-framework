@@ -41,6 +41,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'corsheaders',
+    'accounts.apps.AccountsConfig',
+    'django.contrib.sites',  # 追記
+    'allauth',  # 追記
+    'allauth.account',  # 追記
+    'allauth.socialaccount',  # 追加
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +144,37 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',  # ここに追加
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# 実際にメールを送信
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# メールサーバーへの接続設定
+DEFAULT_FROM_EMAIL = 'your_mail.bm@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'i444409024444@gmail.com'
+EMAIL_HOST_PASSWORD = 'Ii440902'
+EMAIL_USE_TLS = True
+
+# --アカウント認証設定------------------------------------------
+# django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用IDを設定
+SITE_ID = 1
+# 認証バックエンド-ログイン時に何でログインするかを配列の先頭から順に認証する
+AUTHENTICATION_BACKENDS = (
+    # メールアドレス認証
+    'allauth.account.auth_backends.AuthenticationBackend',
+    # ユーザー名認証
+    'django.contrib.auth.backends.ModelBackend',
+)
+# メールアドレス認証に変更する設定
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ユーザー名の入力を必要とする設定
+ACCOUNT_USERNAME_REQUIRED = True
+# サインアップにメールアドレス確認をはさむよう設定
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+# ログイン/ログアウト後の遷移先を設定
+LOGIN_REDIRECT_URL = 'main:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+# ログアウトリンクのクリック一発でログアウトする設定
+ACCOUNT_LOGOUT_ON_GET = True

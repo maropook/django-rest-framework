@@ -19,7 +19,10 @@ from django.urls.conf import include
 from django.conf.urls import url
 from blog.urls import router as blog_router
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('api/', include(blog_router.urls)),
+    path('accounts/', include('allauth.urls')),
+    path('', include('main.urls')),
 ]
